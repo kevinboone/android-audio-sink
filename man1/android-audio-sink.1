@@ -1,0 +1,137 @@
+.TH ANDROID-AUDIO-SINK 1 LOCAL
+
+.SH NAME
+
+android-audio-sink -- play WAV or PCM data presented on standard input 
+
+.SH SYNOPSIS
+
+.B android-audio-sink 
+[ 
+.I 
+.B -b
+bits_per_channel
+]
+[ 
+.I 
+.B -c
+num_channels 
+]
+[ 
+.I 
+.B -h
+]
+[ 
+.I 
+.B -s
+sample_rate
+]
+[ 
+.I 
+.B -v
+]
+
+.SH DESCRIPTION
+
+.B android-audio-sink
+consumes WAV or raw PCM data from standard input, file, or named
+pipe, and plays it on the 
+Android audio hardware using OpenSLES API calls. It is intended to act
+as a temporary helper solution for porting audio applications to KBOX.
+Modifying applications to use OpenSLES rather than OSS or ALSA is a big
+job; but many applications can be made to output PCM or WAV data, which
+can then be piped into
+.B android-audio-sink
+for playback.
+
+If the input source is a WAV stream, there is no need to specify the
+playback parameters -- sample rate, etc -- on the command line, as
+these are read from the WAV header. In the case of raw PCM, it
+probably will be necessary. In the absence of any other instructions,
+it is assumed that the stream is 44.1 kHz, stereo, 16-bits per sample.
+
+Note that any settings in the WAV header, if present, will over-ride
+the command line arguments.
+
+By default, 
+.B android-audio-sink
+consumes from standard input. The 
+.I -f
+switch sets an alternative source, which may be a named pipe. The source
+is consumed strictly sequentially -- no attempt will ever be made to
+seek in the stream or determine its length
+
+.SH OPTIONS
+
+.B android-audio-sink 
+recognizes the following command-line options.
+
+.TP 5
+
+.B -b bits_per_sample 
+Sets the number of bits per sample, typically 8 or 16 
+
+.TP
+
+.TP 5
+
+.B -c channels 
+Sets the number of channels, usually either 1 or 2 
+
+.TP
+
+.TP 5
+
+.B -f file 
+Specify the file or pipe from which to consume audio data. If this
+switch is not given, consume from standard input
+
+.TP
+
+.TP 5
+
+.B -h 
+Show brief help
+
+.TP
+
+
+.TP 5
+
+.B -s sample_rate 
+Sets the sample rate in samples per second
+
+
+.TP 5
+
+.B -v 
+Show version 
+
+
+.SH BUGS AND LIMITATIONS
+
+This program can't play any kind of file or stream big-endian encoding. 
+Fortunately, these are rather unusual these days.
+
+The command-line arguments for sample rate, etc., are passed directly
+to the Android SLES engine, since we have no straightforward way to
+know what settings are supported on a particular device. Incorrect
+settings can cause odd results.
+
+There is no pre-buffering; 
+.B android-audio-sink
+relies on the application feeding it being able to supply data at least 
+as fast as it can be played. If that isn't the case, it might be better
+to write the data into a file first, and play the file, either using
+this utility, or some other.
+
+Playback is smoother, especially for short streams, when consuming from
+standard input, compared to a named pipe.
+
+.SH AUTHOR
+
+.B android-audio-sink
+is part of the KBOX project for Android. It is maintained by
+Kevin Boone. 
+
+
