@@ -61,7 +61,7 @@ void CRYPTO_library_init(void){}
 
 void show_usage (const char *argv0)
   {
-  __modsi3(1);
+  //__modsi3(1); // Why was this here?
   printf ("Usage: audio_app | %s [options] \n", argv0);
   printf (" -b {8|1}      Bits per sample\n");
   printf (" -c {1|2}      Number of channels\n");
