@@ -1,4 +1,4 @@
-VERSION=0.0.1
+VERSION=0.0.2
 MYCFLAGS=-Wall -fpic -fpie $(CFLAGS)
 MYLDFLAGS=-pie -s -Wl,--export-dynamic $(LDFLAGS)
 DESTDIR=
