@@ -12,6 +12,9 @@ channels, and bits per sample
 Note: at present, this utility will not play any kind of file with
 big-endian byte ordering.
 
+Copyright (c)2017 Kevin Boone. Distributed according to the terms
+of the GNU Public Licence, v3.0
+
 ======================================================================*/
 #include <stdio.h>
 #include <assert.h>
@@ -49,7 +52,7 @@ static int fd = 0; // stdin by default
 #define BUFFSIZ 16384 
 static unsigned char buff [BUFFSIZ];
 //
-// Horrible kludge for Chromebooks -- some Chrome library ties to 
+// Horrible kludge for Chromebooks -- some Chrome library tries to 
 //  call this function, even though (presumably) no cryptography
 //  is actually done. So somebody needs to provide the symbol. 
 void CRYPTO_library_init(void){}
