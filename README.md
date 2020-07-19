@@ -1,7 +1,7 @@
 # android-audio-sink
 
-* This utility should be regarded as obsolete. I'm pretty sure it doesn't *
-* work in Android later than 6 or thereabouts. *
+*This utility should be regarded as obsolete. I'm pretty sure it doesn't*
+*work in Android later than 6 or thereabouts.*
 
 This is a simple utility for use with Android native-code applications, that
 takes uncompressed (e.g., WAV) audio data on a named pipe (or standard input), 
